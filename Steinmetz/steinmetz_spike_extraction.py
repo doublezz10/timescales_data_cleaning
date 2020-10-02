@@ -397,136 +397,53 @@ for index, row in subset_pl.iterrows():
 
 del index, row, session, cluster, unit_spikes, spike
 
-#%% Restrict all spike times to only those that fall within ITI ranges (all_itis)
 
-## ACA
+#%% Make all arrays saveable
 
-aca_iti_spikes = []
+# ACA
 
-for unit in range(len(aca_spike_times)):
+fixed_aca_spike_times = np.array(aca_spike_times,dtype=object)
     
-    unit_iti_spikes = []
-    
-    session = subset_aca[unit]['Session']
-    
-    session_itis = all_itis[session]
-    
-    for trial in range(len(session_itis)):
-    
-        for spike in range(len(aca_spike_times[unit])):
-        
-            if aca_spike_times[unit][spike] >= session_itis[trial,0] and aca_spike_times[unit][spike] <= session_itis[trial,1]:
-                
-                    unit_iti_spikes.append(aca_spike_times[unit][spike])
-                    
-    aca_iti_spikes.append(unit_iti_spikes)
-    
-## BLA
+np.save('aca_spikes.npy',fixed_aca_spike_times)
 
-bla_iti_spikes = []
+subset_aca.to_csv('aca_session_info.csv')
 
-for unit in range(len(bla_spike_times)):
-    
-    unit_iti_spikes = []
-    
-    session = subset_bla[unit]['Session']
-    
-    session_itis = all_itis[session]
-    
-    for trial in range(len(session_itis)):
-    
-        for spike in range(len(bla_spike_times[unit])):
-        
-            if bla_spike_times[unit][spike] >= session_itis[trial,0] and bla_spike_times[unit][spike] <= session_itis[trial,1]:
-                
-                    unit_iti_spikes.append(bla_spike_times[unit][spike])
-                    
-    bla_iti_spikes.append(unit_iti_spikes)
-    
-## HC
+# BLA
 
-hc_iti_spikes = []
+fixed_bla_spike_times = np.array(bla_spike_times,dtype=object)
+    
+np.save('bla_spikes.npy',fixed_bla_spike_times)
 
-for unit in range(len(hc_spike_times)):
-    
-    unit_iti_spikes = []
-    
-    session = subset_hc[unit]['Session']
-    
-    session_itis = all_itis[session]
-    
-    for trial in range(len(session_itis)):
-    
-        for spike in range(len(hc_spike_times[unit])):
-        
-            if hc_spike_times[unit][spike] >= session_itis[trial,0] and hc_spike_times[unit][spike] <= session_itis[trial,1]:
-                
-                    unit_iti_spikes.append(hc_spike_times[unit][spike])
-                    
-    hc_iti_spikes.append(unit_iti_spikes)
-    
-## ILA
+subset_bla.to_csv('bla_session_info.csv')
 
-ila_iti_spikes = []
+# HC
 
-for unit in range(len(ila_spike_times)):
+fixed_hc_spike_times = np.array(hc_spike_times,dtype=object)
     
-    unit_iti_spikes = []
-    
-    session = subset_ila[unit]['Session']
-    
-    session_itis = all_itis[session]
-    
-    for trial in range(len(session_itis)):
-    
-        for spike in range(len(ila_spike_times[unit])):
-        
-            if ila_spike_times[unit][spike] >= session_itis[trial,0] and ila_spike_times[unit][spike] <= session_itis[trial,1]:
-                
-                    unit_iti_spikes.append(ila_spike_times[unit][spike])
-                    
-    ila_iti_spikes.append(unit_iti_spikes)
-    
-## ORB
+np.save('hc_spikes.npy',fixed_hc_spike_times)
 
-orb_iti_spikes = []
+subset_hc.to_csv('hc_session_info.csv')
 
-for unit in range(len(orb_spike_times)):
-    
-    unit_iti_spikes = []
-    
-    session = subset_orb[unit]['Session']
-    
-    session_itis = all_itis[session]
-    
-    for trial in range(len(session_itis)):
-    
-        for spike in range(len(orb_spike_times[unit])):
-        
-            if orb_spike_times[unit][spike] >= session_itis[trial,0] and orb_spike_times[unit][spike] <= session_itis[trial,1]:
-                
-                    unit_iti_spikes.append(orb_spike_times[unit][spike])
-                    
-    orb_iti_spikes.append(unit_iti_spikes)
-    
-## PL
+# ILA
 
-pl_iti_spikes = []
+fixed_ila_spike_times = np.array(ila_spike_times,dtype=object)
+    
+np.save('ila_spikes.npy',fixed_ila_spike_times)
 
-for unit in range(len(pl_spike_times)):
+subset_ila.to_csv('ila_session_info.csv')
+
+# ORB
+
+fixed_orb_spike_times = np.array(orb_spike_times,dtype=object)
     
-    unit_iti_spikes = []
+np.save('orb_spikes.npy',fixed_orb_spike_times)
+
+subset_orb.to_csv('orb_session_info.csv')
+
+# PL
+
+fixed_pl_spike_times = np.array(pl_spike_times,dtype=object)
     
-    session = subset_pl[unit]['Session']
-    
-    session_itis = all_itis[session]
-    
-    for trial in range(len(session_itis)):
-    
-        for spike in range(len(pl_spike_times[unit])):
-        
-            if pl_spike_times[unit][spike] >= session_itis[trial,0] and pl_spike_times[unit][spike] <= session_itis[trial,1]:
-                
-                    unit_iti_spikes.append(pl_spike_times[unit][spike])
-                    
-    pl_iti_spikes.append(unit_iti_spikes)
+np.save('pl_spikes.npy',fixed_pl_spike_times)
+
+subset_pl.to_csv('pl_session_info.csv')
