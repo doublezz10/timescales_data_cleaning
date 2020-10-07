@@ -1,49 +1,25 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Sep 29 15:51:10 2020
+Created on Fri Oct  2 11:23:58 2020
 
 @author: zachz
-"""
-
-#%% What does this do?
-"""
-This file will loop through all of the folders (i.e. recording sessions) in the
-Steinmetz dataset. It will make 3d NumPy arrays of each of the following
-variables, organized in this way (n_rows,n_cols,n_z's):
-
-all_intervals-      size: trials x 2 x sessions
-                    data: for each trial, contains start and end times of ITI
-                           
-all_included-       size: trials x 1 x sessions
-                    data: for each trial, True or False for whether trial was
-                    analysed in orignial paper
-
-all_spike_times-    size: n_spikes x sessions
-                    data: one long array of every spike time on the probe
-                    (irrespective of brain area)
-
-all_spike_clusters- size: n_spikes x sessions
-                    data: one long array of which cluster (i.e. unit) each spike
-                    belongs to
-
-all_good_clusters-  size: n_clusters x sessions
-                    data: rates each cluster on quality of spike sorting
-                    0 = noise, 1 = probably multiple neurons
-                    2 = good, 3 = unsorted
-                    
-all_peak_channels-  size: n_clusters x sessions
-                    data: peak channel number for each cluster, used for
-                    mapping brain areas onto cluster numbers
-                    
-all_brain_areas-    size: n_channels x sessions
-                    data: string of abbreviated brain area for each channel
 """
 
 #%% Imports 
 
 import numpy as np
-import os
+import scipy.io as spio
 import pandas as pd
+import os
+
+#%% Loading
+
+aca_spikes = np.load('aca_spikes.npy',allow_pickle=True)
+bla_spikes = np.load('bla_spikes.npy',allow_pickle=True)
+hc_spikes = np.load('hc_spikes.npy',allow_pickle=True)
+ila_spikes = np.load('ila_spikes.npy',allow_pickle=True)
+orb_spikes = np.load('orb_spikes.npy',allow_pickle=True)
+pl_spikes = np.load('pl_spikes.npy',allow_pickle=True)
 
 #%% Loop through each recording session to extract itis and trial_included
 
@@ -158,11 +134,11 @@ for session in range(len(all_good_clusters)):
             peak = int(all_peak_channels[session][cluster][0])
             brain_region = all_brain_areas[session][peak-1]
             
-            good_cluster_regions.append((session,cluster,peak,brain_region))
+            good_cluster_regions.append((session,cluster,brain_region))
             
 # convert ugly list of tuples into pretty dataframe
 
-good_clusters = pd.DataFrame.from_records(good_cluster_regions,columns = ['Session', 'Cluster', 'Peak Channel', 'Brain Region'])
+good_clusters = pd.DataFrame.from_records(good_cluster_regions,columns = ['Session', 'Cluster', 'Brain Region'])
 
 # Clean up workspace :)
 
@@ -250,200 +226,211 @@ del cluster_count, cluster_areas, cluster_tuples, num_ACA_clusters, num_BLA_clus
 del num_ca1_clusters, num_ca2_clusters, num_ca3_clusters, num_dg_clusters, num_HC_clusters
 del num_ILA_clusters, num_ORB_clusters, num_PL_clusters
 
-#%% Separate long arrays of spike times per unit into separate rows per trial
 
-## ACA units
+#%% Delete extraneous variables
 
-aca_spike_times = [] # rows are units, in each row is spike times in ms
-                      # row indices match row index in subset_aca dataframe
+del all_brain_areas, all_good_clusters, all_included, all_intervals
+del all_peak_channels, all_spike_clusters,all_spike_times, good_clusters
 
-# Loop through each row of aca dataframe
-# If the session and cluster match a spike from the all_spike_clusters array,
-# add it to the unit_spikes
-# Then create a list of all unit spikes called aca_spike_times
+#%% Restrict spike times to only those in ITIs
 
-for index, row in subset_aca.iterrows():
-    
-    session = row['Session']
-    cluster = row['Cluster']
+## ACA
+
+aca_iti_spikes = []
+
+for unit in range(len(aca_spikes)):
     
     unit_spikes = []
     
-    for spike in range(len(all_spike_clusters[session])):
+    session = subset_aca['Session'][unit]
+    
+    session_itis = all_itis[session]
+    
+    for trial in range(len(session_itis)):
         
-        if all_spike_clusters[session][spike] == cluster:
+        for spike in range(len(aca_spikes[unit])):
             
-            unit_spikes.append(all_spike_times[session][spike][0])
-            
-    aca_spike_times.append(unit_spikes)
+            if aca_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+                
+                unit_spikes.append(aca_spikes[unit][spike])
+                
+    aca_iti_spikes.append(unit_spikes)
     
-# Clean up workspace
+## BLA
 
-del index, row, session, cluster, unit_spikes, spike
+bla_iti_spikes = []
 
-## BLA units
-
-bla_spike_times = [] # rows are units, in each row is spike times in ms
-
-for index, row in subset_bla.iterrows():
-    
-    session = row['Session']
-    cluster = row['Cluster']
+for unit in range(len(bla_spikes)):
     
     unit_spikes = []
     
-    for spike in range(len(all_spike_clusters[session])):
+    session = subset_bla['Session'][unit]
+    
+    session_itis = all_itis[session]
+    
+    for trial in range(len(session_itis)):
         
-        if all_spike_clusters[session][spike] == cluster:
+        for spike in range(len(bla_spikes[unit])):
             
-            unit_spikes.append(all_spike_times[session][spike][0])
-            
-    bla_spike_times.append(unit_spikes)
+            if bla_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+                
+                unit_spikes.append(bla_spikes[unit][spike])
+                
+    bla_iti_spikes.append(unit_spikes)
     
-# Clean up workspace
+## HC
 
-del index, row, session, cluster, unit_spikes, spike
-    
+hc_iti_spikes = []
 
-## HC units
-
-hc_spike_times = [] # rows are units, in each row is spike times in ms
-
-for index, row in subset_hc.iterrows():
-    
-    session = row['Session']
-    cluster = row['Cluster']
+for unit in range(len(hc_spikes)):
     
     unit_spikes = []
     
-    for spike in range(len(all_spike_clusters[session])):
+    session = subset_hc['Session'][unit]
+    
+    session_itis = all_itis[session]
+    
+    for trial in range(len(session_itis)):
         
-        if all_spike_clusters[session][spike] == cluster:
+        for spike in range(len(hc_spikes[unit])):
             
-            unit_spikes.append(all_spike_times[session][spike][0])
-            
-    hc_spike_times.append(unit_spikes)
+            if hc_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+                
+                unit_spikes.append(hc_spikes[unit][spike])
+                
+    hc_iti_spikes.append(unit_spikes)
     
-# Clean up workspace
+## ILA
 
-del index, row, session, cluster, unit_spikes, spike
+ila_iti_spikes = []
 
-## ILA units
-
-ila_spike_times = [] # rows are units, in each row is spike times in ms
-
-for index, row in subset_ila.iterrows():
-    
-    session = row['Session']
-    cluster = row['Cluster']
+for unit in range(len(ila_spikes)):
     
     unit_spikes = []
     
-    for spike in range(len(all_spike_clusters[session])):
+    session = subset_ila['Session'][unit]
+    
+    session_itis = all_itis[session]
+    
+    for trial in range(len(session_itis)):
         
-        if all_spike_clusters[session][spike] == cluster:
+        for spike in range(len(ila_spikes[unit])):
             
-            unit_spikes.append(all_spike_times[session][spike][0])
-            
-    ila_spike_times.append(unit_spikes)
+            if ila_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+                
+                unit_spikes.append(ila_spikes[unit][spike])
+                
+    ila_iti_spikes.append(unit_spikes)
     
-# Clean up workspace
+## ORB
 
-del index, row, session, cluster, unit_spikes, spike
-    
-## ORB units
+orb_iti_spikes = []
 
-orb_spike_times = [] # rows are units, in each row is spike times in ms
-
-for index, row in subset_orb.iterrows():
-    
-    session = row['Session']
-    cluster = row['Cluster']
+for unit in range(len(orb_spikes)):
     
     unit_spikes = []
     
-    for spike in range(len(all_spike_clusters[session])):
+    session = subset_orb['Session'][unit]
+    
+    session_itis = all_itis[session]
+    
+    for trial in range(len(session_itis)):
         
-        if all_spike_clusters[session][spike] == cluster:
+        for spike in range(len(orb_spikes[unit])):
             
-            unit_spikes.append(all_spike_times[session][spike][0])
-            
-    orb_spike_times.append(unit_spikes)
-    
-# Clean up workspace
+            if orb_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+                
+                unit_spikes.append(orb_spikes[unit][spike])
+                
+    orb_iti_spikes.append(unit_spikes)
+     
+## PL
 
-del index, row, session, cluster, unit_spikes, spike
+pl_iti_spikes = []
 
-## PL units
-
-pl_spike_times = [] # rows are units, in each row is spike times in ms
-
-for index, row in subset_pl.iterrows():
-    
-    session = row['Session']
-    cluster = row['Cluster']
+for unit in range(len(pl_spikes)):
     
     unit_spikes = []
     
-    for spike in range(len(all_spike_clusters[session])):
-        
-        if all_spike_clusters[session][spike] == cluster:
-            
-            unit_spikes.append(all_spike_times[session][spike][0])
-            
-    pl_spike_times.append(unit_spikes)
+    session = subset_pl['Session'][unit]
     
-# Clean up workspace
+    session_itis = all_itis[session]
+    
+    for trial in range(len(session_itis)):
+        
+        for spike in range(len(pl_spikes[unit])):
+            
+            if pl_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+                
+                unit_spikes.append(pl_spikes[unit][spike])
+                
+    pl_iti_spikes.append(unit_spikes)
+    
+# Clean up workspace :)
 
-del index, row, session, cluster, unit_spikes, spike
+del unit, session, session_itis, unit_spikes, spike, trial
 
-
-#%% Make all arrays saveable
+#%% Bigger .mat files: all spikes and ITI spikes
 
 # ACA
 
-fixed_aca_spike_times = np.array(aca_spike_times,dtype=object)
-    
-np.save('aca_spikes.npy',fixed_aca_spike_times)
+aca_dict = {'aca_spikes_all': aca_spikes}
+spio.savemat('aca_spikes.mat',aca_dict)
 
-subset_aca.to_csv('aca_session_info.csv')
+aca_iti = np.array(aca_iti_spikes,dtype=object)
+aca_iti_dict = {'aca_spikes_iti': aca_iti}
+spio.savemat('aca_spikes_with_iti.mat',aca_iti_dict)
 
 # BLA
 
-fixed_bla_spike_times = np.array(bla_spike_times,dtype=object)
-    
-np.save('bla_spikes.npy',fixed_bla_spike_times)
+bla_dict = {'bla_spikes_all': bla_spikes}
+spio.savemat('bla_spikes.mat',bla_dict)
 
-subset_bla.to_csv('bla_session_info.csv')
+bla_iti = np.array(bla_iti_spikes,dtype=object)
+bla_iti_dict = {'bla_spikes_iti': bla_iti}
+spio.savemat('bla_spikes_with_iti.mat',bla_iti_dict)
 
-# HC
+# HC - had to split in half because so big
 
-fixed_hc_spike_times = np.array(hc_spike_times,dtype=object)
-    
-np.save('hc_spikes.npy',fixed_hc_spike_times)
+hc_dict = {'hc_spikes_all': hc_spikes}
+spio.savemat('hc_spikes.mat',hc_dict)
 
-subset_hc.to_csv('hc_session_info.csv')
+hc_iti = np.array(hc_iti_spikes,dtype=object)
+hc_iti_dict = {'hc_spikes_iti': hc_iti}
+
+hc_iti_dict_1 = dict(list(hc_iti_dict.items())[len(hc_iti_dict)//2:]) 
+hc_iti_dict_2 = dict(list(hc_iti_dict.items())[:len(hc_iti_dict)//2]) 
+# spio.savemat('hc_spikes_with_iti_1.mat',hc_iti_dict_1)
+# spio.savemat('hc_spikes_with_iti_2.mat',hc_iti_dict_2)
 
 # ILA
 
-fixed_ila_spike_times = np.array(ila_spike_times,dtype=object)
-    
-np.save('ila_spikes.npy',fixed_ila_spike_times)
+ila_dict = {'ila_spikes_all': ila_spikes}
+spio.savemat('ila_spikes.mat',ila_dict)
 
-subset_ila.to_csv('ila_session_info.csv')
+ila_iti = np.array(ila_iti_spikes,dtype=object)
+ila_iti_dict = {'ila_spikes_iti': ila_iti}
+spio.savemat('ila_spikes_with_iti.mat',ila_iti_dict)
 
 # ORB
 
-fixed_orb_spike_times = np.array(orb_spike_times,dtype=object)
-    
-np.save('orb_spikes.npy',fixed_orb_spike_times)
+orb_dict = {'orb_spikes_all': orb_spikes}
+spio.savemat('orb_spikes.mat',orb_dict)
 
-subset_orb.to_csv('orb_session_info.csv')
+orb_iti = np.array(orb_iti_spikes,dtype=object)
+orb_iti_dict = {'orb_spikes_iti': orb_iti}
+spio.savemat('orb_spikes_with_iti.mat',orb_iti_dict)
 
 # PL
 
-fixed_pl_spike_times = np.array(pl_spike_times,dtype=object)
-    
-np.save('pl_spikes.npy',fixed_pl_spike_times)
+pl_dict = {'pl_spikes_all': pl_spikes}
+spio.savemat('pl_spikes.mat',pl_dict)
 
-subset_pl.to_csv('pl_session_info.csv')
+pl_iti = np.array(pl_iti_spikes,dtype=object)
+pl_iti_dict = {'pl_spikes_iti': pl_iti}
+spio.savemat('pl_spikes_with_iti.mat',pl_iti_dict)
+
+#%% Save ITIs for each session
+
+iti_dict = {'ITIs': all_itis}
+spio.savemat('itis_by_session.mat',iti_dict)

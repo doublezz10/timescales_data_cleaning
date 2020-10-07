@@ -20,12 +20,12 @@ import scipy.io as spio
 
 #%% Loading
 
-aca_spikes = np.load('aca_spikes.npy',allow_pickle=True)
-bla_spikes = np.load('bla_spikes.npy',allow_pickle=True)
-hc_spikes = np.load('hc_spikes.npy',allow_pickle=True)
-ila_spikes = np.load('ila_spikes.npy',allow_pickle=True)
-orb_spikes = np.load('orb_spikes.npy',allow_pickle=True)
-pl_spikes = np.load('pl_spikes.npy',allow_pickle=True)
+aca_spikes = np.load('Steinmetz/aca_spikes.npy',allow_pickle=True)
+bla_spikes = np.load('Steinmetz/bla_spikes.npy',allow_pickle=True)
+hc_spikes = np.load('Steinmetz/hc_spikes.npy',allow_pickle=True)
+ila_spikes = np.load('Steinmetz/ila_spikes.npy',allow_pickle=True)
+orb_spikes = np.load('Steinmetz/orb_spikes.npy',allow_pickle=True)
+pl_spikes = np.load('Steinmetz/pl_spikes.npy',allow_pickle=True)
 
 #%% How are they organized?
 
