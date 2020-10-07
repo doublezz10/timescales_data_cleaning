@@ -10,7 +10,6 @@ Created on Wed Oct  7 15:29:47 2020
 import numpy as np
 import os
 import pandas as pd
-import scipy.io as spio
 
 #%% Loop through each recording session to extract itis and trial_included
 
@@ -135,8 +134,10 @@ bla_locations = location_info[location_info["Brain Region"] == 'BLA']
 ila_locations = location_info[location_info["Brain Region"] == 'ILA']
 orb_locations = location_info[location_info["Brain Region"] == 'ORB']
 pl_locations = location_info[location_info["Brain Region"] == 'PL']
-
-del location_info
+ca1_locations = location_info[location_info["Brain Region"] == 'CA1']
+ca2_locations = location_info[location_info["Brain Region"] == 'CA2']
+ca3_locations = location_info[location_info["Brain Region"] == 'CA3']
+dg_locations = location_info[location_info["Brain Region"] == 'DG']
 
 #%% Save location info as .mat
 
@@ -145,3 +146,7 @@ bla_locations.to_csv('bla_locations.csv')
 ila_locations.to_csv('ila_locations.csv')
 orb_locations.to_csv('orb_locations.csv')
 pl_locations.to_csv('pl_locations.csv')
+ca1_locations.to_csv('ca1_locations.csv')
+ca2_locations.to_csv('ca2_locations.csv')
+ca3_locations.to_csv('ca3_locations.csv')
+dg_locations.to_csv('dg_locations.csv')

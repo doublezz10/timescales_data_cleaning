@@ -14,12 +14,12 @@ import os
 
 #%% Loading
 
-aca_spikes = np.load('aca_spikes.npy',allow_pickle=True)
-bla_spikes = np.load('bla_spikes.npy',allow_pickle=True)
-hc_spikes = np.load('hc_spikes.npy',allow_pickle=True)
-ila_spikes = np.load('ila_spikes.npy',allow_pickle=True)
-orb_spikes = np.load('orb_spikes.npy',allow_pickle=True)
-pl_spikes = np.load('pl_spikes.npy',allow_pickle=True)
+aca_spikes = np.load('D:/timescales_data_cleaning/Steinmetz/npy files/aca_spikes.npy',allow_pickle=True)
+bla_spikes = np.load('D:/timescales_data_cleaning/Steinmetz/npy files/bla_spikes.npy',allow_pickle=True)
+hc_spikes = np.load('D:/timescales_data_cleaning/Steinmetz/npy files/hc_spikes.npy',allow_pickle=True)
+ila_spikes = np.load('D:/timescales_data_cleaning/Steinmetz/npy files/ila_spikes.npy',allow_pickle=True)
+orb_spikes = np.load('D:/timescales_data_cleaning/Steinmetz/npy files/orb_spikes.npy',allow_pickle=True)
+pl_spikes = np.load('D:/timescales_data_cleaning/Steinmetz/npy files/pl_spikes.npy',allow_pickle=True)
 
 #%% Loop through each recording session to extract itis and trial_included
 
@@ -390,16 +390,16 @@ bla_iti = np.array(bla_iti_spikes,dtype=object)
 bla_iti_dict = {'bla_spikes_iti': bla_iti}
 spio.savemat('bla_spikes_with_iti.mat',bla_iti_dict)
 
-# HC - had to split in half because so big
+# # HC - had to split in half because so big
 
-hc_dict = {'hc_spikes_all': hc_spikes}
-spio.savemat('hc_spikes.mat',hc_dict)
+# hc_dict = {'hc_spikes_all': hc_spikes}
+# spio.savemat('hc_spikes.mat',hc_dict)
 
-hc_iti = np.array(hc_iti_spikes,dtype=object)
-hc_iti_dict = {'hc_spikes_iti': hc_iti}
+# hc_iti = np.array(hc_iti_spikes,dtype=object)
+# hc_iti_dict = {'hc_spikes_iti': hc_iti}
 
-hc_iti_dict_1 = dict(list(hc_iti_dict.items())[len(hc_iti_dict)//2:]) 
-hc_iti_dict_2 = dict(list(hc_iti_dict.items())[:len(hc_iti_dict)//2]) 
+# hc_iti_dict_1 = dict(list(hc_iti_dict.items())[len(hc_iti_dict)//2:]) 
+# hc_iti_dict_2 = dict(list(hc_iti_dict.items())[:len(hc_iti_dict)//2]) 
 # spio.savemat('hc_spikes_with_iti_1.mat',hc_iti_dict_1)
 # spio.savemat('hc_spikes_with_iti_2.mat',hc_iti_dict_2)
 
