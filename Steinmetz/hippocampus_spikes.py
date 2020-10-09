@@ -128,6 +128,10 @@ subset_dg = good_clusters[good_clusters["Brain Region"] == 'DG']
 num_dg_clusters = subset_dg.count()
 num_dg_clusters = num_dg_clusters['Brain Region']
 
+subset_ca1 = subset_ca1.reset_index(drop=True)
+subset_ca2 = subset_ca2.reset_index(drop=True)
+subset_ca3 = subset_ca3.reset_index(drop=True)
+subset_dg = subset_dg.reset_index(drop=True)
 
 #%% Spike times
 
@@ -359,3 +363,29 @@ spio.savemat('dg_spikes.mat',dg_dict)
 dg_iti = np.array(dg_iti_spikes,dtype=object)
 dg_iti_dict = {'dg_spikes_iti': dg_iti}
 spio.savemat('dg_spikes_with_iti.mat',dg_iti_dict)
+
+#%% Make all arrays saveable
+
+# ca1
+
+fixed_ca1_spike_times = np.array(ca1_spikes,dtype=object)
+    
+np.save('ca1_spikes.npy',fixed_ca1_spike_times)
+
+# ca2
+
+fixed_ca2_spike_times = np.array(ca2_spikes,dtype=object)
+    
+np.save('ca2_spikes.npy',fixed_ca2_spike_times)
+
+# ca3
+
+fixed_ca3_spike_times = np.array(ca3_spikes,dtype=object)
+    
+np.save('ca3_spikes.npy',fixed_ca3_spike_times)
+
+# dg
+
+fixed_dg_spike_times = np.array(dg_spikes,dtype=object)
+    
+np.save('dg_spikes.npy',fixed_dg_spike_times)
