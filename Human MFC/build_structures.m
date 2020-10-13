@@ -28,6 +28,15 @@ for row =1:length(data_mfc)
         brain_area = 'preSMA';
     end
     
+    % Convert trial-aligned spike times to "raw" spike times
+    % By adding 1.5 ITI, 1.5s pre-stim and next trial's RT
+    
+    for trial = 1:length(response_ts)
+        
+        response_ts{trial} = response_ts{trial} + 2.5*trial + 1.3*trial; 
+        
+    end
+    
     row_struct = struct('SessionID',session,'ClusterNumber',cluster,'BrainArea',brain_area,'SpikeTimes',response_ts);
     
     mfc_units{row} = row_struct;
@@ -58,7 +67,13 @@ for row =1:length(data_ha)
         brain_area = 'preSMA';
     end
     
-    row_struct = struct('SessionID',session,'ClusterNumber',cluster,'BrainArea',brain_area,'SpikeTimes',spikes);
+    for trial = 1:length(response_ts)
+        
+        response_ts{trial} = response_ts{trial} + 2.5*trial + 1.3*trial;  
+        
+    end
+    
+    row_struct = struct('SessionID',session,'ClusterNumber',cluster,'BrainArea',brain_area,'SpikeTimes',response_ts);
     
     ha_units{row} = row_struct;
     

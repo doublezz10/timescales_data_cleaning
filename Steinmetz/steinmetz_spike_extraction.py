@@ -492,9 +492,11 @@ for unit in range(len(aca_spikes)):
         
         for spike in range(len(aca_spikes[unit])):
             
-            if aca_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+            if session_itis[trial,0] <= aca_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(aca_spikes[unit][spike])
+                
+    unit_spikes = np.array(unit_spikes)
                 
     aca_iti_spikes.append(unit_spikes)
     
@@ -514,9 +516,11 @@ for unit in range(len(bla_spikes)):
         
         for spike in range(len(bla_spikes[unit])):
             
-            if bla_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+            if session_itis[trial,0] <= bla_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(bla_spikes[unit][spike])
+                
+    unit_spikes = np.array(unit_spikes)
                 
     bla_iti_spikes.append(unit_spikes)
     
@@ -537,9 +541,11 @@ for unit in range(len(ila_spikes)):
         
         for spike in range(len(ila_spikes[unit])):
             
-            if ila_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+            if session_itis[trial,0] <= ila_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(ila_spikes[unit][spike])
+                
+    unit_spikes = np.array(unit_spikes)
                 
     ila_iti_spikes.append(unit_spikes)
     
@@ -559,9 +565,11 @@ for unit in range(len(orb_spikes)):
         
         for spike in range(len(orb_spikes[unit])):
             
-            if orb_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+            if session_itis[trial,0] <= orb_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(orb_spikes[unit][spike])
+                
+    unit_spikes = np.array(unit_spikes)
                 
     orb_iti_spikes.append(unit_spikes)
      
@@ -581,9 +589,11 @@ for unit in range(len(pl_spikes)):
         
         for spike in range(len(pl_spikes[unit])):
             
-            if pl_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+            if session_itis[trial,0] <= pl_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(pl_spikes[unit][spike])
+                
+    unit_spikes = np.array(unit_spikes)
                 
     pl_iti_spikes.append(unit_spikes)
     
@@ -603,9 +613,11 @@ for unit in range(len(ca1_spikes)):
         
         for spike in range(len(ca1_spikes[unit])):
             
-            if ca1_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+            if session_itis[trial,0] <= ca1_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(ca1_spikes[unit][spike])
+                
+    unit_spikes = np.array(unit_spikes)
                 
     ca1_iti_spikes.append(unit_spikes)
     
@@ -625,9 +637,11 @@ for unit in range(len(ca2_spikes)):
         
         for spike in range(len(ca2_spikes[unit])):
             
-            if ca2_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+            if session_itis[trial,0] <= ca2_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(ca2_spikes[unit][spike])
+                
+    unit_spikes = np.array(unit_spikes)
                 
     ca2_iti_spikes.append(unit_spikes)
     
@@ -647,9 +661,11 @@ for unit in range(len(ca3_spikes)):
         
         for spike in range(len(ca3_spikes[unit])):
             
-            if ca3_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+            if session_itis[trial,0] <= ca3_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(ca3_spikes[unit][spike])
+    
+    unit_spikes = np.array(unit_spikes)
                 
     ca3_iti_spikes.append(unit_spikes)
     
@@ -669,9 +685,11 @@ for unit in range(len(dg_spikes)):
         
         for spike in range(len(dg_spikes[unit])):
             
-            if dg_spikes[unit][spike] <= session_itis[trial,1] and spike >= session_itis[trial,0]:
+            if session_itis[trial,0] <= dg_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(dg_spikes[unit][spike])
+    
+    unit_spikes = np.array(unit_spikes)
                 
     dg_iti_spikes.append(unit_spikes)
     
@@ -697,9 +715,11 @@ for unit in range(len(aca_spikes)):
         
         for spike in range(len(aca_spikes[unit])):
             
-            if aca_spikes[unit][spike] <= session_intervals[trial][1] and spike >= session_intervals[trial][0]:
+            if session_intervals[trial][0] <= aca_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(aca_spikes[unit][spike])
+    
+    unit_spikes = np.array(unit_spikes)
                 
     aca_task_spikes.append(unit_spikes)
     
@@ -719,9 +739,11 @@ for unit in range(len(bla_spikes)):
         
         for spike in range(len(bla_spikes[unit])):
             
-            if bla_spikes[unit][spike] <= session_intervals[trial][1] and spike >= session_intervals[trial][0]:
+            if session_intervals[trial][0] <= bla_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(bla_spikes[unit][spike])
+    
+    unit_spikes = np.array(unit_spikes)
                 
     bla_task_spikes.append(unit_spikes)
     
@@ -742,9 +764,11 @@ for unit in range(len(ila_spikes)):
         
         for spike in range(len(ila_spikes[unit])):
             
-            if ila_spikes[unit][spike] <= session_intervals[trial][1] and spike >= session_intervals[trial][0]:
+            if session_intervals[trial][0] <= ila_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(ila_spikes[unit][spike])
+    
+    unit_spikes = np.array(unit_spikes)
                 
     ila_task_spikes.append(unit_spikes)
     
@@ -764,9 +788,11 @@ for unit in range(len(orb_spikes)):
         
         for spike in range(len(orb_spikes[unit])):
             
-            if orb_spikes[unit][spike] <= session_intervals[trial][1] and spike >= session_intervals[trial][0]:
+            if session_intervals[trial][0] <= orb_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(orb_spikes[unit][spike])
+    
+    unit_spikes = np.array(unit_spikes)
                 
     orb_task_spikes.append(unit_spikes)
      
@@ -786,9 +812,11 @@ for unit in range(len(pl_spikes)):
         
         for spike in range(len(pl_spikes[unit])):
             
-            if pl_spikes[unit][spike] <= session_intervals[trial][1] and spike >= session_intervals[trial][0]:
+            if session_intervals[trial][0] <= pl_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(pl_spikes[unit][spike])
+    
+    unit_spikes = np.array(unit_spikes)
                 
     pl_task_spikes.append(unit_spikes)
     
@@ -808,9 +836,11 @@ for unit in range(len(ca1_spikes)):
         
         for spike in range(len(ca1_spikes[unit])):
             
-            if ca1_spikes[unit][spike] <= session_intervals[trial][1] and spike >= session_intervals[trial][0]:
+            if session_intervals[trial][0] <= ca1_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(ca1_spikes[unit][spike])
+    
+    unit_spikes = np.array(unit_spikes)
                 
     ca1_task_spikes.append(unit_spikes)
     
@@ -830,10 +860,12 @@ for unit in range(len(ca2_spikes)):
         
         for spike in range(len(ca2_spikes[unit])):
             
-            if ca2_spikes[unit][spike] <= session_intervals[trial][1] and spike >= session_intervals[trial][0]:
+            if session_intervals[trial][0] <= ca2_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(ca2_spikes[unit][spike])
                 
+    unit_spikes = np.array(unit_spikes)
+    
     ca2_task_spikes.append(unit_spikes)
 
 ## CA3
@@ -852,9 +884,11 @@ for unit in range(len(ca3_spikes)):
         
         for spike in range(len(ca3_spikes[unit])):
             
-            if ca3_spikes[unit][spike] <= session_intervals[trial][1] and spike >= session_intervals[trial][0]:
+            if session_intervals[trial][0] <= ca3_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(ca3_spikes[unit][spike])
+    
+    unit_spikes = np.array(unit_spikes)
                 
     ca3_task_spikes.append(unit_spikes)
     
@@ -874,9 +908,11 @@ for unit in range(len(dg_spikes)):
         
         for spike in range(len(dg_spikes[unit])):
             
-            if dg_spikes[unit][spike] <= session_intervals[trial][1] and spike >= session_intervals[trial][0]:
+            if session_intervals[trial][0] <= dg_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(dg_spikes[unit][spike])
+    
+    unit_spikes = np.array(unit_spikes)
                 
     dg_task_spikes.append(unit_spikes)
     
