@@ -29,11 +29,11 @@ for row =1:length(data_mfc)
     end
     
     % Convert trial-aligned spike times to "raw" spike times
-    % By adding 1.5 ITI, 1.5s pre-stim and next trial's RT
+    % By adding 10 sec b/w each trial
     
     for trial = 1:length(response_ts)
         
-        response_ts{trial} = response_ts{trial} + 2.5*trial + 1.3*trial; 
+        response_ts{trial} = response_ts{trial} + 10*trial; 
         
     end
     
@@ -69,7 +69,7 @@ for row =1:length(data_ha)
     
     for trial = 1:length(response_ts)
         
-        response_ts{trial} = response_ts{trial} + 2.5*trial + 1.3*trial;  
+        response_ts{trial} = response_ts{trial} + 10*trial;
         
     end
     
