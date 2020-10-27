@@ -52,10 +52,11 @@ for unit=1:length(units)
                 
             end
             
-            rest_scACC{end+1} = fixation_spikes;
-            task_scACC{end+1} = trial_spikes;
             
         end
+        
+    rest_scACC{end+1} = fixation_spikes;
+    task_scACC{end+1} = trial_spikes;
         
     
     end
@@ -86,11 +87,11 @@ for unit=1:length(units)
                 
             end
             
-            rest_amygdala{end+1} = fixation_spikes;
-            task_amygdala{end+1} = trial_spikes;
-            
         end
         
+    rest_amygdala{end+1} = fixation_spikes;
+    task_amygdala{end+1} = trial_spikes;
+            
     
     end
     
@@ -121,11 +122,10 @@ for unit=1:length(units)
                 
             end
             
-            rest_ventralStriatum{end+1} = fixation_spikes;
-            task_ventralStriatum{end+1} = trial_spikes;
-            
         end
         
+    rest_ventralStriatum{end+1} = fixation_spikes;
+    task_ventralStriatum{end+1} = trial_spikes;
     
     end
     
