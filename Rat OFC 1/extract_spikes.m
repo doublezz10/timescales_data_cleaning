@@ -1,3 +1,7 @@
+% Filenames is a 1 x n_units cell array with each unit's timeseries
+% Other variables are 1 x n_sessions and each contain 1 x n_trials for
+% each session
+
 clear
 
 filenames = getfn('D:\CRCNS OFC 1 - Rats\data');
