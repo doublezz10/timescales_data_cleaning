@@ -61,11 +61,11 @@ for unit=1:length(timeseries)
         
        for spike=1:length(unit_spikes)
 
-           if unit_spikes(spike) >= trialstart && unit_spikes(spike) <= odor_on
+           if unit_spikes(spike) >= trialstart && unit_spikes(spike) <= trialstart + odor_on
                
                rest_spikes(end+1) = unit_spikes(spike);
            
-           elseif unit_spikes(spike) >= odor_on && unit_spikes(spike) <= water_off
+           elseif unit_spikes(spike) >= trialstart + odor_on && unit_spikes(spike) <= trialstart + water_off
                
                task_spikes(end+1) = unit_spikes(spike);
           
