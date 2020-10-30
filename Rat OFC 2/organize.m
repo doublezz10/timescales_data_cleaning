@@ -5,20 +5,18 @@
 
 clear
 
-load('/Users/zachz/downloads/rat_ofc_1.mat')
+load('/Users/zachz/downloads/rat_ofc_2.mat')
 
 % Create arrays the same length as 'timeseries' to assign an animal and
 % recording session to each unit
 
-unit_per_session_n1 = [12 7 2 1 3 1 7 10 7 6 8 10 14 17 17 13 9 6 5 3 5 13];
-unit_per_session_p5 = [2 3 18 6 3 5 1];
-unit_per_session_p9 = [15 7 9 7 6 3 1 7 4 6 7 2 1];
-unit_per_session_t5 = [10 18 14 14 6 7 8 6 12 7 3 2];
-unit_per_session_w1 = [8 12 14 7 21 13 8 11 9 9 3 10 1];
+unit_per_session_n1 = [14 11 8 6 7 5 9 12 12 11 11 15 15 21 19 17 11 7 6 3 5 17];
+unit_per_session_n48 = [8 15 14 15 14 13 11 11 18 8 13 10 16 9 6 4 3];
+unit_per_session_n49 = [5 10 12 11 8 13 18 10 11 10 6 9 8];
 
-all_sessions = [unit_per_session_n1 unit_per_session_p5 unit_per_session_p9 unit_per_session_t5 unit_per_session_w1];
+all_sessions = [unit_per_session_n1 unit_per_session_n48 unit_per_session_n49];
 
-unit_sessions = ones(1,12);
+unit_sessions = ones(1,14);
 
 for session=2:length(all_sessions)
 
@@ -28,11 +26,10 @@ for session=2:length(all_sessions)
     
 end
 
-unit_animals = ones(1,176); unit_animals = [unit_animals [2*ones(1,38)]];
-unit_animals = [unit_animals [3*ones(1,75)]]; unit_animals = [unit_animals [4*ones(1,107)]];
-unit_animals = [unit_animals [5*ones(1,126)]];
+unit_animals = ones(1,242); unit_animals = [unit_animals [2*ones(1,188)]];
+unit_animals = [unit_animals [3*ones(1,131)]];
 
-clear unit_per_session_n1 unit_per_session_p5 unit_per_session_p9 unit_per_session_t5 unit_per_session_w1 session
+clear unit_per_session_n1 unit_per_session_n48 unit_per_session_n49 session
 
 % Build structures with info we care about
 
@@ -42,7 +39,7 @@ rest = cell(1,length(timeseries));
 
 for unit=1:length(timeseries)
     
-    dataset = 'Feierstein';
+    dataset = 'Kepecs';
     species = 'rat';
     brain_area = 'OFC';
     animal = unit_animals(unit);
@@ -61,11 +58,11 @@ for unit=1:length(timeseries)
         
        for spike=1:length(unit_spikes)
 
-           if unit_spikes(spike) >= trialstart && unit_spikes(spike) <= odor_on
+           if unit_spikes(spike) >= trialstart && unit_spikes(spike) <= trialstart + odor_on
                
                rest_spikes(end+1) = unit_spikes(spike);
            
-           elseif unit_spikes(spike) >= odor_on && unit_spikes(spike) <= water_off
+           elseif unit_spikes(spike) >= trialstart + odor_on && unit_spikes(spike) <= trialstart + water_off
                
                task_spikes(end+1) = unit_spikes(spike);
           
@@ -79,4 +76,4 @@ for unit=1:length(timeseries)
         
 end
 
-save('ofc_1.mat','task','rest','cell_info')
+save('ofc_2.mat','task','rest','cell_info')
