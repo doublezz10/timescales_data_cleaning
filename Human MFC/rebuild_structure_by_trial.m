@@ -3,8 +3,8 @@
 clear
 
 load('human_MFC.mat')
-load('ha_spiketimes.mat')
-load('mfc_spiketimes.mat')
+load('ha_spiketimes_by_trial.mat')
+load('mfc_spiketimes_by_trial.mat')
 
 cell_info_hc = {};
 cell_info_amygdala = {};
@@ -29,10 +29,10 @@ for unit = 1:length(ha_units)
     
     if strcmp(ha_units{unit}(1).BrainArea,'hippocampus') == 1
         cell_info_hc{end+1} = struct(field1,value1,field2,value2,field3,value3,field4,value4);
-        spiketimes_hc{end+1} = single(all_spikes);
+        spiketimes_hc{end+1} = all_spikes;
     elseif strcmp(ha_units{unit}(1).BrainArea,'amygdala') == 1
         cell_info_amygdala{end+1} = struct(field1,value1,field2,value2,field3,value3,field4,value4);
-        spiketimes_amygdala{end+1} = single(all_spikes);
+        spiketimes_amygdala{end+1} = all_spikes;
     end
 end
 
@@ -47,10 +47,10 @@ for unit = 1:length(mfc_units)
     
     if strcmp(mfc_units{unit}(1).BrainArea,'dorsal ACC') == 1
         cell_info_dACC{end+1} = struct(field1,value1,field2,value2,field3,value3,field4,value4);
-        spiketimes_dACC{end+1} = single(all_spikes);
+        spiketimes_dACC{end+1} = all_spikes;
     elseif strcmp(mfc_units{unit}(1).BrainArea,'preSMA') == 1
         cell_info_preSMA{end+1} = struct(field1,value1,field2,value2,field3,value3,field4,value4);
-        spiketimes_preSMA{end+1} = single(all_spikes);
+        spiketimes_preSMA{end+1} = all_spikes;
     end
 end
 

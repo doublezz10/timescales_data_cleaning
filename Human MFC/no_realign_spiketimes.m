@@ -33,7 +33,7 @@ for row =1:length(data_mfc)
     
     for trial = 1:length(response_ts)
         
-        response_ts{trial} = response_ts{trial} + 10*trial; 
+        response_ts{trial} = response_ts{trial}; 
         
     end
     
@@ -69,7 +69,7 @@ for row =1:length(data_ha)
     
     for trial = 1:length(response_ts)
         
-        response_ts{trial} = response_ts{trial} + 10*trial;
+        response_ts{trial} = response_ts{trial};
         
     end
     
@@ -79,7 +79,7 @@ for row =1:length(data_ha)
     
 end
 
-save('human_MFC.mat','mfc_units','ha_units')
+save('human_MFC_no_realign.mat','mfc_units','ha_units')
 
 %% What does the structure look like?
 %{
