@@ -56,8 +56,10 @@ end
 % 1=right hippocampus, 2=left hippocampus, 3=right amygdala, 4=left amygdala
 
 filenames = getfn('D:\Human medial temporal lobe\Data\events','brainArea.mat$');
+event_list = getfn('D:\Human medial temporal lobe\Data\events','eventsRaw.mat$');
 
 brain_area_info = {};
+events_info = {};
 
 for file = 1:length(filenames)
     
@@ -65,8 +67,28 @@ for file = 1:length(filenames)
     
     if exist('brainArea','var')
         
-        brain_area_info{1,end+1} = brainArea(:,3);
-        brain_area_info{2,end+1} = brainArea(:,4);
+        brain_area_info{1,file} = brainArea(:,3);
+        brain_area_info{2,file} = brainArea(:,4);
+        
+    end
+    
+    load(event_list{file})
+    
+    responses = [];
+    
+    if exist('events','var')
+        
+        for event = 1:length(events)
+        
+            if events(event,2) == 6
+            
+                responses(end+1) = events(event,1);
+                
+            events_info{file} = responses;
+            
+            end
+            
+        end
         
     end
     
@@ -95,6 +117,35 @@ for cluster  = 1:num_clusters
     
 end
 
+%% Assign clusters to response timestamps
+
+unique_clusters_by_session = cell(1,64);
+
+for session = 1:length(brain_area_info)
+    
+    unique_clusters_by_session{session} = unique(brain_area_info{1,session});
+    
+end
+
+session_for_each_cluster = [];
+
+for cluster = 1:length(unique_clusters)
+    
+    for session = 1:length(unique_clusters_by_session)
+        
+        if sum(ismember(unique_clusters(cluster),unique_clusters_by_session{session})) >= 1
+            
+            session_for_each_cluster(1,cluster) = session;
+            session_for_each_cluster(2,cluster) = cluster;
+            
+        end
+        
+    end
+    
+end
+
+session_for_each_cluster = transpose(session_for_each_cluster);
+            
 %% Build structure
 
 cell_info_hc = {};
@@ -107,29 +158,29 @@ for unit = 1:num_clusters
     
     if all_brain_areas(unit) == 1
     
-        cell_info_hc{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','hippocampus','Cluster',unique_clusters(cluster));
+        cell_info_hc{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','hippocampus','Cluster',unique_clusters(cluster),'TrialBreaks',events_info{session_for_each_cluster(cluster,1)});
         spikes_hc{end+1} = spikes_per_unit{unit};
         
     elseif all_brain_areas(unit) == 2
         
-        cell_info_hc{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','hippocampus','Cluster',unique_clusters(cluster));
+        cell_info_hc{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','hippocampus','Cluster',unique_clusters(cluster),'TrialBreaks',events_info{session_for_each_cluster(cluster,1)});
         spikes_hc{end+1} = spikes_per_unit{unit};
         
     elseif all_brain_areas(unit) == 3
         
-        cell_info_amygdala{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','amygdala','Cluster',unique_clusters(cluster));
+        cell_info_amygdala{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','amygdala','Cluster',unique_clusters(cluster),'TrialBreaks',events_info{session_for_each_cluster(cluster,1)});
         spikes_amygdala{end+1} = spikes_per_unit{unit};
         
     elseif all_brain_areas(unit) == 4
         
-        cell_info_amygdala{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','amygdala','Cluster',unique_clusters(cluster));
+        cell_info_amygdala{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','amygdala','Cluster',unique_clusters(cluster),'TrialBreaks',events_info{session_for_each_cluster(cluster,1)});
         spikes_amygdala{end+1} = spikes_per_unit{unit};
         
     end
     
 end
 
-%% Save!
+%% Save spiketimes only!
 
 spikes = spikes_hc;
 cell_info = cell_info_hc;
