@@ -1,7 +1,7 @@
 clear
 
-% load('D:\Data from Meg\units_for_Zach.mat')
-load('/Users/zachz/Downloads/units_for_Zach.mat')
+load('D:\Data from Meg\units_for_Zach.mat')
+% load('/Users/zachz/Downloads/units_for_Zach.mat')
 
 
 cell_info_scACC = {};
@@ -28,12 +28,15 @@ for unit=1:length(units)
     ap_coord = units(unit).AP;
     total_depth = units(unit).total_depth;
     
+    fixation_times = units(unit).fixOn;
+    stim_times = units(unit).stimOn;
+    
     fixation_spikes = [];
     trial_spikes = [];
     
     if strcmp(brain_area,'SC') == 1
         brain_area = 'scACC';
-        cell_info_scACC{end+1} = struct('Dataset',dataset,'Species',species,'Unit_name',unit_name,'Brain_area',brain_area,'AP',ap_coord,'ML',ml_coord,'total_depth',total_depth);
+        cell_info_scACC{end+1} = struct('Dataset',dataset,'Species',species,'Unit_name',unit_name,'Brain_area',brain_area,'AP',ap_coord,'ML',ml_coord,'total_depth',total_depth,'fix_on',fixation_times,'stim_on',stim_times);
         
         for trial = 1:length(units(unit).fixOn)
         
@@ -62,7 +65,7 @@ for unit=1:length(units)
         
     elseif strcmp(brain_area,'AMY') == 1
         brain_area = 'amygdala';
-        cell_info_amygdala{end+1} = struct('Dataset',dataset,'Species',species,'Unit_name',unit_name,'Brain_area',brain_area,'AP',ap_coord,'ML',ml_coord,'total_depth',total_depth);
+        cell_info_amygdala{end+1} = struct('Dataset',dataset,'Species',species,'Unit_name',unit_name,'Brain_area',brain_area,'AP',ap_coord,'ML',ml_coord,'total_depth',total_depth,'fix_on',fixation_times,'stim_on',stim_times);
         
         fixation_spikes = [];
         trial_spikes = [];
@@ -92,7 +95,7 @@ for unit=1:length(units)
     
     elseif strcmp(brain_area,'VS') == 1
         brain_area = 'ventralStriatum';
-        cell_info_ventralStriatum{end+1} = struct('Dataset',dataset,'Species',species,'Unit_name',unit_name,'Brain_area',brain_area,'AP',ap_coord,'ML',ml_coord,'total_depth',total_depth);
+        cell_info_ventralStriatum{end+1} = struct('Dataset',dataset,'Species',species,'Unit_name',unit_name,'Brain_area',brain_area,'AP',ap_coord,'ML',ml_coord,'total_depth',total_depth,'fix_on',fixation_times,'stim_on',stim_times);
         
         fixation_spikes = [];
         trial_spikes = [];
