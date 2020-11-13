@@ -37,7 +37,7 @@ for unit=1:length(units)
     
     fixation_spikes = [];
     trial_spikes = [];
-    fix_spikes_by_trial = [];
+    fix_spikes_by_trial = {};
     
     if strcmp(brain_area,'SC') == 1
         brain_area = 'scACC';
@@ -66,7 +66,7 @@ for unit=1:length(units)
                 
             end
             
-            fix_spikes_by_trial(end+1) = trial_fix_spikes;
+            fix_spikes_by_trial{end+1} = trial_fix_spikes;
             
             
         end
@@ -81,6 +81,7 @@ for unit=1:length(units)
         
         fixation_spikes = [];
         trial_spikes = [];
+        fix_spikes_by_trial = {};
         
         for trial = 1:length(units(unit).fixOn)
         
@@ -95,6 +96,8 @@ for unit=1:length(units)
             for spike = 1:length(spikes)
                 if spikes(spike) >= fixation_start && spikes(spike) <= fixation_end
                     fixation_spikes(end+1) = spikes(spike);
+                    
+                    trial_fix_spikes(end+1) = spikes(spike);
 
                 elseif spikes(spike) >= task_start && spikes(spike) <= task_end
                     trial_spikes(end+1) = spikes(spike);
@@ -102,10 +105,13 @@ for unit=1:length(units)
                 
             end
             
+            fix_spikes_by_trial{end+1} = trial_fix_spikes;
+            
         end
         
     rest_amygdala{end+1} = fixation_spikes;
     task_amygdala{end+1} = trial_spikes;
+    by_trial_amygdala{end+1} = fix_spikes_by_trial;
     
     elseif strcmp(brain_area,'VS') == 1
         brain_area = 'ventralStriatum';
@@ -113,6 +119,7 @@ for unit=1:length(units)
         
         fixation_spikes = [];
         trial_spikes = [];
+        fix_spikes_by_trial = {};
         
         for trial = 1:length(units(unit).fixOn)
         
@@ -122,9 +129,13 @@ for unit=1:length(units)
             task_end = units(unit).rewardTime(trial);
             spikes = units(unit).spikes;
             
+            trial_fix_spikes = [];
+            
             for spike = 1:length(spikes)
                 if spikes(spike) >= fixation_start && spikes(spike) <= fixation_end
                     fixation_spikes(end+1) = spikes(spike);
+                    
+                    trial_fix_spikes(end+1) = spikes(spike);
 
                 elseif spikes(spike) >= task_start && spikes(spike) <= task_end
                     trial_spikes(end+1) = spikes(spike);
@@ -132,21 +143,24 @@ for unit=1:length(units)
                 
             end
             
+            fix_spikes_by_trial{end+1} = trial_fix_spikes;
+            
         end
         
     rest_ventralStriatum{end+1} = fixation_spikes;
     task_ventralStriatum{end+1} = trial_spikes;
+    by_trial_ventralStriatum{end+1} = fix_spikes_by_trial;
     
     end
     
 end
 
 
-% task = task_scACC; fixation = rest_scACC; cell_info = cell_info_scACC;
-% save('meg_scACC.mat', 'task', 'fixation', 'cell_info')
-% 
-% task = task_amygdala; fixation = rest_amygdala; cell_info = cell_info_amygdala;
-% save('meg_amygdala.mat', 'task', 'fixation', 'cell_info')
-% 
-% task = task_ventralStriatum; fixation = rest_ventralStriatum; cell_info = cell_info_ventralStriatum;
-% save('meg_ventralStriatum.mat', 'task', 'fixation', 'cell_info')
+spikes = by_trial_scACC; cell_info = cell_info_scACC;
+save('meg_scACC.mat', 'spikes', 'cell_info')
+
+spikes = by_trial_amygdala; cell_info = cell_info_amygdala;
+save('meg_amygdala.mat', 'spikes', 'cell_info')
+
+spikes = by_trial_ventralStriatum; cell_info = cell_info_ventralStriatum;
+save('meg_ventralStriatum.mat', 'spikes', 'cell_info')
