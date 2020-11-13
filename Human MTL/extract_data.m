@@ -156,24 +156,27 @@ spikes_amygdala = {};
 
 for unit = 1:num_clusters
     
+    session = session_for_each_cluster(unit,1);
+
+    
     if all_brain_areas(unit) == 1
     
-        cell_info_hc{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','hippocampus','Cluster',unique_clusters(cluster),'TrialBreaks',events_info{session_for_each_cluster(cluster,1)});
+        cell_info_hc{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','hippocampus','Cluster',unique_clusters(unit),'TrialBreaks',events_info{session});
         spikes_hc{end+1} = spikes_per_unit{unit};
         
     elseif all_brain_areas(unit) == 2
         
-        cell_info_hc{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','hippocampus','Cluster',unique_clusters(cluster),'TrialBreaks',events_info{session_for_each_cluster(cluster,1)});
+        cell_info_hc{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','hippocampus','Cluster',unique_clusters(unit),'TrialBreaks',events_info{session});
         spikes_hc{end+1} = spikes_per_unit{unit};
         
     elseif all_brain_areas(unit) == 3
         
-        cell_info_amygdala{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','amygdala','Cluster',unique_clusters(cluster),'TrialBreaks',events_info{session_for_each_cluster(cluster,1)});
+        cell_info_amygdala{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','amygdala','Cluster',unique_clusters(unit),'TrialBreaks',events_info{session});
         spikes_amygdala{end+1} = spikes_per_unit{unit};
         
     elseif all_brain_areas(unit) == 4
         
-        cell_info_amygdala{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','amygdala','Cluster',unique_clusters(cluster),'TrialBreaks',events_info{session_for_each_cluster(cluster,1)});
+        cell_info_amygdala{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','amygdala','Cluster',unique_clusters(unit),'TrialBreaks',events_info{session});
         spikes_amygdala{end+1} = spikes_per_unit{unit};
         
     end
@@ -181,7 +184,7 @@ for unit = 1:num_clusters
     
 end
 
-%% Save spiketimes only!
+% Save spiketimes only!
 
 spikes = spikes_hc;
 cell_info = cell_info_hc;
