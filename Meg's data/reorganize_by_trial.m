@@ -57,7 +57,7 @@ for unit=1:length(units)
                 if spikes(spike) >= fixation_start && spikes(spike) <= fixation_end
                     fixation_spikes(end+1) = spikes(spike);
                     
-                    trial_fix_spikes(end+1) = spikes(spike);
+                    trial_fix_spikes(end+1) = spikes(spike) - fixation_start;
                 
                 elseif spikes(spike) >= task_start && spikes(spike) <= task_end
                     trial_spikes(end+1) = spikes(spike);
@@ -97,7 +97,7 @@ for unit=1:length(units)
                 if spikes(spike) >= fixation_start && spikes(spike) <= fixation_end
                     fixation_spikes(end+1) = spikes(spike);
                     
-                    trial_fix_spikes(end+1) = spikes(spike);
+                    trial_fix_spikes(end+1) = spikes(spike) - fixation_start;
 
                 elseif spikes(spike) >= task_start && spikes(spike) <= task_end
                     trial_spikes(end+1) = spikes(spike);
@@ -135,7 +135,7 @@ for unit=1:length(units)
                 if spikes(spike) >= fixation_start && spikes(spike) <= fixation_end
                     fixation_spikes(end+1) = spikes(spike);
                     
-                    trial_fix_spikes(end+1) = spikes(spike);
+                    trial_fix_spikes(end+1) = spikes(spike) - fixation_start;
 
                 elseif spikes(spike) >= task_start && spikes(spike) <= task_end
                     trial_spikes(end+1) = spikes(spike);
