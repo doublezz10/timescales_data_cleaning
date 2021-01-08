@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Sep 29 15:51:10 2020
+Created on Tue♣ Sep 29 15:51:10 2020
 
 @author: zachz
 """
@@ -480,9 +480,13 @@ del index, row, session, cluster, unit_spikes, spike
 
 aca_iti_spikes = []
 
+aca_iti_spikes_by_trial = []
+
 for unit in range(len(aca_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_aca['Session'][unit]
     
@@ -490,11 +494,19 @@ for unit in range(len(aca_spikes)):
     
     for trial in range(len(session_itis)):
         
+        trial_spikes = []
+        
         for spike in range(len(aca_spikes[unit])):
             
             if session_itis[trial,0] <= aca_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(aca_spikes[unit][spike])
+                
+                trial_spikes.append(aca_spikes[unit][spike] - session_itis[trial,0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    aca_iti_spikes_by_trial.append(unit_spikes_by_trial)
                 
     unit_spikes = np.array(unit_spikes)
                 
@@ -504,9 +516,13 @@ for unit in range(len(aca_spikes)):
 
 bla_iti_spikes = []
 
+bla_iti_spikes_by_trial = []
+
 for unit in range(len(bla_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_bla['Session'][unit]
     
@@ -514,11 +530,19 @@ for unit in range(len(bla_spikes)):
     
     for trial in range(len(session_itis)):
         
+        trial_spikes = []
+        
         for spike in range(len(bla_spikes[unit])):
             
             if session_itis[trial,0] <= bla_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(bla_spikes[unit][spike])
+                
+                trial_spikes.append(bla_spikes[unit][spike] - session_itis[trial,0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+        
+    bla_iti_spikes_by_trial.append(unit_spikes_by_trial)
                 
     unit_spikes = np.array(unit_spikes)
                 
@@ -529,9 +553,13 @@ for unit in range(len(bla_spikes)):
 
 ila_iti_spikes = []
 
+ila_iti_spikes_by_trial = []
+
 for unit in range(len(ila_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_ila['Session'][unit]
     
@@ -539,11 +567,19 @@ for unit in range(len(ila_spikes)):
     
     for trial in range(len(session_itis)):
         
+        trial_spikes = []
+        
         for spike in range(len(ila_spikes[unit])):
             
             if session_itis[trial,0] <= ila_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(ila_spikes[unit][spike])
+                
+                trial_spikes.append(ila_spikes[unit][spike] - session_itis[trial,0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    ila_iti_spikes_by_trial.append(unit_spikes_by_trial)
                 
     unit_spikes = np.array(unit_spikes)
                 
@@ -553,9 +589,13 @@ for unit in range(len(ila_spikes)):
 
 orb_iti_spikes = []
 
+orb_iti_spikes_by_trial = []
+
 for unit in range(len(orb_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_orb['Session'][unit]
     
@@ -563,11 +603,19 @@ for unit in range(len(orb_spikes)):
     
     for trial in range(len(session_itis)):
         
+        trial_spikes = []
+        
         for spike in range(len(orb_spikes[unit])):
             
             if session_itis[trial,0] <= orb_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(orb_spikes[unit][spike])
+                
+                trial_spikes.append(orb_spikes[unit][spike] - session_itis[trial,0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    orb_iti_spikes_by_trial.append(unit_spikes_by_trial)
                 
     unit_spikes = np.array(unit_spikes)
                 
@@ -577,9 +625,13 @@ for unit in range(len(orb_spikes)):
 
 pl_iti_spikes = []
 
+pl_iti_spikes_by_trial = []
+
 for unit in range(len(pl_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_pl['Session'][unit]
     
@@ -587,11 +639,19 @@ for unit in range(len(pl_spikes)):
     
     for trial in range(len(session_itis)):
         
+        trial_spikes = []
+        
         for spike in range(len(pl_spikes[unit])):
             
             if session_itis[trial,0] <= pl_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(pl_spikes[unit][spike])
+                
+                trial_spikes.append(pl_spikes[unit][spike] - session_itis[trial,0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    pl_iti_spikes_by_trial.append(unit_spikes_by_trial)
                 
     unit_spikes = np.array(unit_spikes)
                 
@@ -601,9 +661,13 @@ for unit in range(len(pl_spikes)):
 
 ca1_iti_spikes = []
 
+ca1_iti_spikes_by_trial = []
+
 for unit in range(len(ca1_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_ca1['Session'][unit]
     
@@ -611,11 +675,19 @@ for unit in range(len(ca1_spikes)):
     
     for trial in range(len(session_itis)):
         
+        trial_spikes = []
+        
         for spike in range(len(ca1_spikes[unit])):
             
             if session_itis[trial,0] <= ca1_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(ca1_spikes[unit][spike])
+                
+                trial_spikes.append(ca1_spikes[unit][spike] - session_itis[trial,0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    ca1_iti_spikes_by_trial.append(unit_spikes_by_trial)
                 
     unit_spikes = np.array(unit_spikes)
                 
@@ -625,9 +697,13 @@ for unit in range(len(ca1_spikes)):
 
 ca2_iti_spikes = []
 
+ca2_iti_spikes_by_trial = []
+
 for unit in range(len(ca2_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_ca2['Session'][unit]
     
@@ -635,11 +711,19 @@ for unit in range(len(ca2_spikes)):
     
     for trial in range(len(session_itis)):
         
+        trial_spikes = []
+        
         for spike in range(len(ca2_spikes[unit])):
             
             if session_itis[trial,0] <= ca2_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(ca2_spikes[unit][spike])
+                
+                trial_spikes.append(ca2_spikes[unit][spike] - session_itis[trial,0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    ca2_iti_spikes_by_trial.append(unit_spikes_by_trial)
                 
     unit_spikes = np.array(unit_spikes)
                 
@@ -649,9 +733,13 @@ for unit in range(len(ca2_spikes)):
 
 ca3_iti_spikes = []
 
+ca3_iti_spikes_by_trial = []
+
 for unit in range(len(ca3_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_ca3['Session'][unit]
     
@@ -659,12 +747,20 @@ for unit in range(len(ca3_spikes)):
     
     for trial in range(len(session_itis)):
         
+        trial_spikes = []
+        
         for spike in range(len(ca3_spikes[unit])):
             
             if session_itis[trial,0] <= ca3_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(ca3_spikes[unit][spike])
+                
+                trial_spikes.append(ca3_spikes[unit][spike] - session_itis[trial,0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
     
+    ca3_iti_spikes_by_trial.append(unit_spikes_by_trial)
+                
     unit_spikes = np.array(unit_spikes)
                 
     ca3_iti_spikes.append(unit_spikes)
@@ -673,9 +769,13 @@ for unit in range(len(ca3_spikes)):
 
 dg_iti_spikes = []
 
+dg_iti_spikes_by_trial = []
+
 for unit in range(len(dg_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_dg['Session'][unit]
     
@@ -683,19 +783,27 @@ for unit in range(len(dg_spikes)):
     
     for trial in range(len(session_itis)):
         
+        trial_spikes = []
+        
         for spike in range(len(dg_spikes[unit])):
             
             if session_itis[trial,0] <= dg_spikes[unit][spike] <= session_itis[trial,1]:
                 
                 unit_spikes.append(dg_spikes[unit][spike])
+                
+                trial_spikes.append(dg_spikes[unit][spike] - session_itis[trial,0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
     
+    dg_iti_spikes_by_trial.append(unit_spikes_by_trial)
+                
     unit_spikes = np.array(unit_spikes)
                 
     dg_iti_spikes.append(unit_spikes)
     
 # Clean up workspace :)
 
-del unit, session, session_itis, unit_spikes, spike, trial
+del unit, session, session_itis, unit_spikes, spike, trial, trial_spikes, unit_spikes_by_trial
 
 #%% Restrict spike times to only those during task
 
@@ -703,9 +811,13 @@ del unit, session, session_itis, unit_spikes, spike, trial
 
 aca_task_spikes = []
 
+aca_task_spikes_by_trial = []
+
 for unit in range(len(aca_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_aca['Session'][unit]
     
@@ -713,11 +825,19 @@ for unit in range(len(aca_spikes)):
     
     for trial in range(len(session_intervals)):
         
+        trial_spikes = []
+        
         for spike in range(len(aca_spikes[unit])):
             
             if session_intervals[trial][0] <= aca_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(aca_spikes[unit][spike])
+                
+                trial_spikes.append(aca_spikes[unit][spike] - session_intervals[trial][0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    aca_task_spikes_by_trial.append(unit_spikes_by_trial)
     
     unit_spikes = np.array(unit_spikes)
                 
@@ -727,9 +847,13 @@ for unit in range(len(aca_spikes)):
 
 bla_task_spikes = []
 
+bla_task_spikes_by_trial = []
+
 for unit in range(len(bla_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_bla['Session'][unit]
     
@@ -737,11 +861,19 @@ for unit in range(len(bla_spikes)):
     
     for trial in range(len(session_intervals)):
         
+        trial_spikes = []
+        
         for spike in range(len(bla_spikes[unit])):
             
             if session_intervals[trial][0] <= bla_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(bla_spikes[unit][spike])
+                
+                trial_spikes.append(bla_spikes[unit][spike] - session_intervals[trial][0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    bla_task_spikes_by_trial.append(unit_spikes_by_trial)
     
     unit_spikes = np.array(unit_spikes)
                 
@@ -752,9 +884,13 @@ for unit in range(len(bla_spikes)):
 
 ila_task_spikes = []
 
+ila_task_spikes_by_trial = []
+
 for unit in range(len(ila_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_ila['Session'][unit]
     
@@ -762,11 +898,19 @@ for unit in range(len(ila_spikes)):
     
     for trial in range(len(session_intervals)):
         
+        trial_spikes = []
+        
         for spike in range(len(ila_spikes[unit])):
             
             if session_intervals[trial][0] <= ila_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(ila_spikes[unit][spike])
+                
+                trial_spikes.append(ila_spikes[unit][spike] - session_intervals[trial][0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    ila_task_spikes_by_trial.append(unit_spikes_by_trial)
     
     unit_spikes = np.array(unit_spikes)
                 
@@ -776,9 +920,13 @@ for unit in range(len(ila_spikes)):
 
 orb_task_spikes = []
 
+orb_task_spikes_by_trial = []
+
 for unit in range(len(orb_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_orb['Session'][unit]
     
@@ -786,11 +934,19 @@ for unit in range(len(orb_spikes)):
     
     for trial in range(len(session_intervals)):
         
+        trial_spikes = []
+        
         for spike in range(len(orb_spikes[unit])):
             
             if session_intervals[trial][0] <= orb_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(orb_spikes[unit][spike])
+                
+                trial_spikes.append(orb_spikes[unit][spike] - session_intervals[trial][0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    orb_task_spikes_by_trial.append(unit_spikes_by_trial)
     
     unit_spikes = np.array(unit_spikes)
                 
@@ -800,9 +956,13 @@ for unit in range(len(orb_spikes)):
 
 pl_task_spikes = []
 
+pl_task_spikes_by_trial = []
+
 for unit in range(len(pl_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_pl['Session'][unit]
     
@@ -810,11 +970,19 @@ for unit in range(len(pl_spikes)):
     
     for trial in range(len(session_intervals)):
         
+        trial_spikes = []
+        
         for spike in range(len(pl_spikes[unit])):
             
             if session_intervals[trial][0] <= pl_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(pl_spikes[unit][spike])
+                
+                trial_spikes.append(pl_spikes[unit][spike] - session_intervals[trial][0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    pl_task_spikes_by_trial.append(unit_spikes_by_trial)
     
     unit_spikes = np.array(unit_spikes)
                 
@@ -824,9 +992,13 @@ for unit in range(len(pl_spikes)):
 
 ca1_task_spikes = []
 
+ca1_task_spikes_by_trial = []
+
 for unit in range(len(ca1_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_ca1['Session'][unit]
     
@@ -834,11 +1006,19 @@ for unit in range(len(ca1_spikes)):
     
     for trial in range(len(session_intervals)):
         
+        trial_spikes = []
+        
         for spike in range(len(ca1_spikes[unit])):
             
             if session_intervals[trial][0] <= ca1_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(ca1_spikes[unit][spike])
+                
+                trial_spikes.append(ca1_spikes[unit][spike] - session_intervals[trial][0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    ca1_task_spikes_by_trial.append(unit_spikes_by_trial)
     
     unit_spikes = np.array(unit_spikes)
                 
@@ -848,9 +1028,13 @@ for unit in range(len(ca1_spikes)):
 
 ca2_task_spikes = []
 
+ca2_task_spikes_by_trial = []
+
 for unit in range(len(ca2_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_ca2['Session'][unit]
     
@@ -858,23 +1042,35 @@ for unit in range(len(ca2_spikes)):
     
     for trial in range(len(session_intervals)):
         
+        trial_spikes = []
+        
         for spike in range(len(ca2_spikes[unit])):
             
             if session_intervals[trial][0] <= ca2_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(ca2_spikes[unit][spike])
                 
-    unit_spikes = np.array(unit_spikes)
+                trial_spikes.append(ca2_spikes[unit][spike] - session_intervals[trial][0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
     
+    ca2_task_spikes_by_trial.append(unit_spikes_by_trial)
+    
+    unit_spikes = np.array(unit_spikes)
+                
     ca2_task_spikes.append(unit_spikes)
 
 ## CA3
 
 ca3_task_spikes = []
 
+ca3_task_spikes_by_trial = []
+
 for unit in range(len(ca3_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_ca3['Session'][unit]
     
@@ -882,11 +1078,19 @@ for unit in range(len(ca3_spikes)):
     
     for trial in range(len(session_intervals)):
         
+        trial_spikes = []
+        
         for spike in range(len(ca3_spikes[unit])):
             
             if session_intervals[trial][0] <= ca3_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(ca3_spikes[unit][spike])
+                
+                trial_spikes.append(ca3_spikes[unit][spike] - session_intervals[trial][0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    ca3_task_spikes_by_trial.append(unit_spikes_by_trial)
     
     unit_spikes = np.array(unit_spikes)
                 
@@ -896,9 +1100,13 @@ for unit in range(len(ca3_spikes)):
 
 dg_task_spikes = []
 
+dg_task_spikes_by_trial = []
+
 for unit in range(len(dg_spikes)):
     
     unit_spikes = []
+    
+    unit_spikes_by_trial = []
     
     session = subset_dg['Session'][unit]
     
@@ -906,11 +1114,19 @@ for unit in range(len(dg_spikes)):
     
     for trial in range(len(session_intervals)):
         
+        trial_spikes = []
+        
         for spike in range(len(dg_spikes[unit])):
             
             if session_intervals[trial][0] <= dg_spikes[unit][spike] <= session_intervals[trial][1]:
                 
                 unit_spikes.append(dg_spikes[unit][spike])
+                
+                trial_spikes.append(dg_spikes[unit][spike] - session_intervals[trial][0])
+                
+        unit_spikes_by_trial.append(trial_spikes)
+    
+    dg_task_spikes_by_trial.append(unit_spikes_by_trial)
     
     unit_spikes = np.array(unit_spikes)
                 
@@ -919,161 +1135,226 @@ for unit in range(len(dg_spikes)):
     
 # Clean up workspace :)
 
-del unit, session, session_intervals, unit_spikes, spike, trial
+del unit, session, session_intervals, unit_spikes, spike, trial, unit_spikes_by_trial, trial_spikes
 
 #%% Save arrays as numpy
 
-# ACA
+# # ACA
 
-aca_spikes = np.array(aca_spikes,dtype=object)
-aca_iti_spikes = np.array(aca_iti_spikes,dtype=object)
-aca_task_spikes = np.array(aca_task_spikes,dtype=object)
+# aca_spikes = np.array(aca_spikes,dtype=object)
+# aca_iti_spikes = np.array(aca_iti_spikes,dtype=object)
+# aca_task_spikes = np.array(aca_task_spikes,dtype=object)
 
-np.save('aca_all_spikes.npy',aca_spikes)
-np.save('aca_iti_spikes.npy',aca_iti_spikes)
-np.save('aca_task_spikes.npy',aca_task_spikes)
+# np.save('aca_all_spikes.npy',aca_spikes)
+# np.save('aca_iti_spikes.npy',aca_iti_spikes)
+# np.save('aca_task_spikes.npy',aca_task_spikes)
 
-# BLA
+# # BLA
 
-bla_spikes = np.array(bla_spikes,dtype=object)
-bla_iti_spikes = np.array(bla_iti_spikes,dtype=object)
-bla_task_spikes = np.array(bla_task_spikes,dtype=object)
+# bla_spikes = np.array(bla_spikes,dtype=object)
+# bla_iti_spikes = np.array(bla_iti_spikes,dtype=object)
+# bla_task_spikes = np.array(bla_task_spikes,dtype=object)
 
-np.save('bla_all_spikes.npy',bla_spikes)
-np.save('bla_iti_spikes.npy',bla_iti_spikes)
-np.save('bla_task_spikes.npy',bla_task_spikes)
+# np.save('bla_all_spikes.npy',bla_spikes)
+# np.save('bla_iti_spikes.npy',bla_iti_spikes)
+# np.save('bla_task_spikes.npy',bla_task_spikes)
 
-# ILA
+# # ILA
 
-ila_spikes = np.array(ila_spikes,dtype=object)
-ila_iti_spikes = np.array(ila_iti_spikes,dtype=object)
-ila_task_spikes = np.array(ila_task_spikes,dtype=object)
+# ila_spikes = np.array(ila_spikes,dtype=object)
+# ila_iti_spikes = np.array(ila_iti_spikes,dtype=object)
+# ila_task_spikes = np.array(ila_task_spikes,dtype=object)
 
-np.save('ila_all_spikes.npy',ila_spikes)
-np.save('ila_iti_spikes.npy',ila_iti_spikes)
-np.save('ila_task_spikes.npy',ila_task_spikes)
+# np.save('ila_all_spikes.npy',ila_spikes)
+# np.save('ila_iti_spikes.npy',ila_iti_spikes)
+# np.save('ila_task_spikes.npy',ila_task_spikes)
 
-# ORB
+# # ORB
 
-orb_spikes = np.array(orb_spikes,dtype=object)
-orb_iti_spikes = np.array(orb_iti_spikes,dtype=object)
-orb_task_spikes = np.array(orb_task_spikes,dtype=object)
+# orb_spikes = np.array(orb_spikes,dtype=object)
+# orb_iti_spikes = np.array(orb_iti_spikes,dtype=object)
+# orb_task_spikes = np.array(orb_task_spikes,dtype=object)
 
-np.save('orb_all_spikes.npy',orb_spikes)
-np.save('orb_iti_spikes.npy',orb_iti_spikes)
-np.save('orb_task_spikes.npy',orb_task_spikes)
+# np.save('orb_all_spikes.npy',orb_spikes)
+# np.save('orb_iti_spikes.npy',orb_iti_spikes)
+# np.save('orb_task_spikes.npy',orb_task_spikes)
 
-# PL
+# # PL
 
-pl_spikes = np.array(pl_spikes,dtype=object)
-pl_iti_spikes = np.array(pl_iti_spikes,dtype=object)
-pl_task_spikes = np.array(pl_task_spikes,dtype=object)
+# pl_spikes = np.array(pl_spikes,dtype=object)
+# pl_iti_spikes = np.array(pl_iti_spikes,dtype=object)
+# pl_task_spikes = np.array(pl_task_spikes,dtype=object)
 
-np.save('pl_all_spikes.npy',pl_spikes)
-np.save('pl_iti_spikes.npy',pl_iti_spikes)
-np.save('pl_task_spikes.npy',pl_task_spikes)
+# np.save('pl_all_spikes.npy',pl_spikes)
+# np.save('pl_iti_spikes.npy',pl_iti_spikes)
+# np.save('pl_task_spikes.npy',pl_task_spikes)
 
-# CA1
+# # CA1
 
-ca1_spikes = np.array(ca1_spikes,dtype=object)
-ca1_iti_spikes = np.array(ca1_iti_spikes,dtype=object)
-ca1_task_spikes = np.array(ca1_task_spikes,dtype=object)
+# ca1_spikes = np.array(ca1_spikes,dtype=object)
+# ca1_iti_spikes = np.array(ca1_iti_spikes,dtype=object)
+# ca1_task_spikes = np.array(ca1_task_spikes,dtype=object)
 
-np.save('ca1_all_spikes.npy',ca1_spikes)
-np.save('ca1_iti_spikes.npy',ca1_iti_spikes)
-np.save('ca1_task_spikes.npy',ca1_task_spikes)
+# np.save('ca1_all_spikes.npy',ca1_spikes)
+# np.save('ca1_iti_spikes.npy',ca1_iti_spikes)
+# np.save('ca1_task_spikes.npy',ca1_task_spikes)
 
-# CA2
+# # CA2
 
-ca2_spikes = np.array(ca2_spikes,dtype=object)
-ca2_iti_spikes = np.array(ca2_iti_spikes,dtype=object)
-ca2_task_spikes = np.array(ca2_task_spikes,dtype=object)
+# ca2_spikes = np.array(ca2_spikes,dtype=object)
+# ca2_iti_spikes = np.array(ca2_iti_spikes,dtype=object)
+# ca2_task_spikes = np.array(ca2_task_spikes,dtype=object)
 
-np.save('ca2_all_spikes.npy',ca2_spikes)
-np.save('ca2_iti_spikes.npy',ca2_iti_spikes)
-np.save('ca2_task_spikes.npy',ca2_task_spikes)
+# np.save('ca2_all_spikes.npy',ca2_spikes)
+# np.save('ca2_iti_spikes.npy',ca2_iti_spikes)
+# np.save('ca2_task_spikes.npy',ca2_task_spikes)
 
-# CA3
+# # CA3
 
-ca3_spikes = np.array(ca3_spikes,dtype=object)
-ca3_iti_spikes = np.array(ca3_iti_spikes,dtype=object)
-ca3_task_spikes = np.array(ca3_task_spikes,dtype=object)
+# ca3_spikes = np.array(ca3_spikes,dtype=object)
+# ca3_iti_spikes = np.array(ca3_iti_spikes,dtype=object)
+# ca3_task_spikes = np.array(ca3_task_spikes,dtype=object)
 
-np.save('ca3_all_spikes.npy',ca3_spikes)
-np.save('ca3_iti_spikes.npy',ca3_iti_spikes)
-np.save('ca3_task_spikes.npy',ca3_task_spikes)
+# np.save('ca3_all_spikes.npy',ca3_spikes)
+# np.save('ca3_iti_spikes.npy',ca3_iti_spikes)
+# np.save('ca3_task_spikes.npy',ca3_task_spikes)
 
-# DG
+# # DG
 
-dg_spikes = np.array(dg_spikes,dtype=object)
-dg_iti_spikes = np.array(dg_iti_spikes,dtype=object)
-dg_task_spikes = np.array(dg_task_spikes,dtype=object)
+# dg_spikes = np.array(dg_spikes,dtype=object)
+# dg_iti_spikes = np.array(dg_iti_spikes,dtype=object)
+# dg_task_spikes = np.array(dg_task_spikes,dtype=object)
 
-np.save('dg_all_spikes.npy',dg_spikes)
-np.save('dg_iti_spikes.npy',dg_iti_spikes)
-np.save('dg_task_spikes.npy',dg_task_spikes)
+# np.save('dg_all_spikes.npy',dg_spikes)
+# np.save('dg_iti_spikes.npy',dg_iti_spikes)
+# np.save('dg_task_spikes.npy',dg_task_spikes)
 
 #%% Save MATLAB files
 
+# # ACA
+
+# aca_task_dict = {'aca_task': aca_task_spikes}
+# aca_iti_dict = {'aca_iti': aca_iti_spikes}
+# spio.savemat('aca_iti.mat',aca_iti_dict)
+# spio.savemat('aca_task.mat',aca_task_dict)
+
+# # BLA
+
+# bla_task_dict = {'bla_task': bla_task_spikes}
+# bla_iti_dict = {'bla_iti': bla_iti_spikes}
+# spio.savemat('bla_iti.mat',bla_iti_dict)
+# spio.savemat('bla_task.mat',bla_task_dict)
+
+# # ILA
+
+# ila_task_dict = {'ila_task': ila_task_spikes}
+# ila_iti_dict = {'ila_iti': ila_iti_spikes}
+# spio.savemat('ila_iti.mat',ila_iti_dict)
+# spio.savemat('ila_task.mat',ila_task_dict)
+
+# # ORB
+
+# orb_task_dict = {'orb_task': orb_task_spikes}
+# orb_iti_dict = {'orb_iti': orb_iti_spikes}
+# spio.savemat('orb_iti.mat',orb_iti_dict)
+# spio.savemat('orb_task.mat',orb_task_dict)
+
+# # PL
+
+# pl_task_dict = {'pl_task': pl_task_spikes}
+# pl_iti_dict = {'pl_iti': pl_iti_spikes}
+# spio.savemat('pl_iti.mat',pl_iti_dict)
+# spio.savemat('pl_task.mat',pl_task_dict)
+
+# # CA1
+
+# ca1_task_dict = {'ca1_task': ca1_task_spikes}
+# ca1_iti_dict = {'ca1_iti': ca1_iti_spikes}
+# spio.savemat('ca1_iti.mat',ca1_iti_dict)
+# spio.savemat('ca1_task.mat',ca1_task_dict)
+
+# # CA2
+
+# ca2_task_dict = {'ca2_task': ca2_task_spikes}
+# ca2_iti_dict = {'ca2_iti': ca2_iti_spikes}
+# spio.savemat('ca2_iti.mat',ca2_iti_dict)
+# spio.savemat('ca2_task.mat',ca2_task_dict)
+
+# # CA3
+
+# ca3_task_dict = {'ca3_task': ca3_task_spikes}
+# ca3_iti_dict = {'ca3_iti': ca3_iti_spikes}
+# spio.savemat('ca3_iti.mat',ca3_iti_dict)
+# spio.savemat('ca3_task.mat',ca3_task_dict)
+
+# # DG
+
+# dg_task_dict = {'dg_task': dg_task_spikes}
+# dg_iti_dict = {'dg_iti': dg_iti_spikes}
+# spio.savemat('dg_iti.mat',dg_iti_dict)
+# spio.savemat('dg_task.mat',dg_task_dict)
+
+#%% Save MATLAB files for by trial data
+
 # ACA
 
-aca_task_dict = {'aca_task': aca_task_spikes}
-aca_iti_dict = {'aca_iti': aca_iti_spikes}
-spio.savemat('aca_iti.mat',aca_iti_dict)
-spio.savemat('aca_task.mat',aca_task_dict)
+aca_task_dict_by_trial = {'aca_task_by_trial': aca_task_spikes_by_trial}
+aca_iti_dict_by_trial = {'aca_iti_by_trial': aca_iti_spikes_by_trial}
+spio.savemat('aca_iti_trial.mat',aca_iti_dict_by_trial)
+spio.savemat('aca_task_trial.mat',aca_task_dict_by_trial)
 
 # BLA
 
-bla_task_dict = {'bla_task': bla_task_spikes}
-bla_iti_dict = {'bla_iti': bla_iti_spikes}
-spio.savemat('bla_iti.mat',bla_iti_dict)
-spio.savemat('bla_task.mat',bla_task_dict)
+bla_task_dict_by_trial = {'bla_task_by_trial': bla_task_spikes_by_trial}
+bla_iti_dict_by_trial = {'bla_iti_by_trial': bla_iti_spikes_by_trial}
+spio.savemat('bla_iti_trial.mat',bla_iti_dict_by_trial)
+spio.savemat('bla_task_trial.mat',bla_task_dict_by_trial)
 
 # ILA
 
-ila_task_dict = {'ila_task': ila_task_spikes}
-ila_iti_dict = {'ila_iti': ila_iti_spikes}
-spio.savemat('ila_iti.mat',ila_iti_dict)
-spio.savemat('ila_task.mat',ila_task_dict)
+ila_task_dict_by_trial = {'ila_task_by_trial': ila_task_spikes_by_trial}
+ila_iti_dict_by_trial = {'ila_iti_by_trial': ila_iti_spikes_by_trial}
+spio.savemat('ila_iti_trial.mat',ila_iti_dict_by_trial)
+spio.savemat('ila_task_trial.mat',ila_task_dict_by_trial)
 
 # ORB
 
-orb_task_dict = {'orb_task': orb_task_spikes}
-orb_iti_dict = {'orb_iti': orb_iti_spikes}
-spio.savemat('orb_iti.mat',orb_iti_dict)
-spio.savemat('orb_task.mat',orb_task_dict)
+orb_task_dict_by_trial = {'orb_task_by_trial': orb_task_spikes_by_trial}
+orb_iti_dict_by_trial = {'orb_iti_by_trial': orb_iti_spikes_by_trial}
+spio.savemat('orb_iti_trial.mat',orb_iti_dict_by_trial)
+spio.savemat('orb_task_trial.mat',orb_task_dict_by_trial)
 
 # PL
 
-pl_task_dict = {'pl_task': pl_task_spikes}
-pl_iti_dict = {'pl_iti': pl_iti_spikes}
-spio.savemat('pl_iti.mat',pl_iti_dict)
-spio.savemat('pl_task.mat',pl_task_dict)
+pl_task_dict_by_trial = {'pl_task_by_trial': pl_task_spikes_by_trial}
+pl_iti_dict_by_trial = {'pl_iti_by_trial': pl_iti_spikes_by_trial}
+spio.savemat('pl_iti_trial.mat',pl_iti_dict_by_trial)
+spio.savemat('pl_task_trial.mat',pl_task_dict_by_trial)
 
 # CA1
 
-ca1_task_dict = {'ca1_task': ca1_task_spikes}
-ca1_iti_dict = {'ca1_iti': ca1_iti_spikes}
-spio.savemat('ca1_iti.mat',ca1_iti_dict)
-spio.savemat('ca1_task.mat',ca1_task_dict)
+ca1_task_dict_by_trial = {'ca1_task_by_trial': ca1_task_spikes_by_trial}
+ca1_iti_dict_by_trial = {'ca1_iti_by_trial': ca1_iti_spikes_by_trial}
+spio.savemat('ca1_iti_trial.mat',ca1_iti_dict_by_trial)
+spio.savemat('ca1_task_trial.mat',ca1_task_dict_by_trial)
 
 # CA2
 
-ca2_task_dict = {'ca2_task': ca2_task_spikes}
-ca2_iti_dict = {'ca2_iti': ca2_iti_spikes}
-spio.savemat('ca2_iti.mat',ca2_iti_dict)
-spio.savemat('ca2_task.mat',ca2_task_dict)
+ca2_task_dict_by_trial = {'ca2_task_by_trial': ca2_task_spikes_by_trial}
+ca2_iti_dict_by_trial = {'ca2_iti_by_trial': ca2_iti_spikes_by_trial}
+spio.savemat('ca2_iti_trial.mat',ca2_iti_dict_by_trial)
+spio.savemat('ca2_task_trial.mat',ca2_task_dict_by_trial)
 
 # CA3
 
-ca3_task_dict = {'ca3_task': ca3_task_spikes}
-ca3_iti_dict = {'ca3_iti': ca3_iti_spikes}
-spio.savemat('ca3_iti.mat',ca3_iti_dict)
-spio.savemat('ca3_task.mat',ca3_task_dict)
+ca3_task_dict_by_trial = {'ca3_task_by_trial': ca3_task_spikes_by_trial}
+ca3_iti_dict_by_trial = {'ca3_iti_by_trial': ca3_iti_spikes_by_trial}
+spio.savemat('ca3_iti_trial.mat',ca3_iti_dict_by_trial)
+spio.savemat('ca3_task_trial.mat',ca3_task_dict_by_trial)
 
 # DG
 
-dg_task_dict = {'dg_task': dg_task_spikes}
-dg_iti_dict = {'dg_iti': dg_iti_spikes}
-spio.savemat('dg_iti.mat',dg_iti_dict)
-spio.savemat('dg_task.mat',dg_task_dict)
+dg_task_dict_by_trial = {'dg_task_by_trial': dg_task_spikes_by_trial}
+dg_iti_dict_by_trial = {'dg_iti_by_trial': dg_iti_spikes_by_trial}
+spio.savemat('dg_iti_trial.mat',dg_iti_dict_by_trial)
+spio.savemat('dg_task_trial.mat',dg_task_dict_by_trial)
