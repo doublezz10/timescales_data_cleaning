@@ -184,6 +184,7 @@ for unit = 1:num_clusters
     
 end
 
+<<<<<<< Updated upstream
 % Save spiketimes only!
 
 spikes = spikes_hc;
@@ -195,3 +196,16 @@ spikes = spikes_amygdala;
 cell_info = cell_info_amygdala;
 
 save('faraut_amygdala.mat','spikes','cell_info')
+=======
+% %% Save!
+% 
+% spikes = spikes_hc;
+% cell_info = cell_info_hc;
+% 
+% save('faraut_hippocampus.mat','spikes','cell_info')
+% 
+% spikes = spikes_amygdala;
+% cell_info = cell_info_amygdala;
+% 
+% save('faraut_amygdala.mat','spikes','cell_info')
+>>>>>>> Stashed changes

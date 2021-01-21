@@ -34,8 +34,7 @@ clear unit_per_session_n1 unit_per_session_n48 unit_per_session_n49 session
 % Build structures with info we care about
 
 cell_info = cell(1,length(timeseries));
-task = cell(1,length(timeseries));
-rest = cell(1,length(timeseries));
+spikes = cell(1,length(timeseries));
 
 for unit=1:length(timeseries)
     
@@ -50,30 +49,9 @@ for unit=1:length(timeseries)
     rest_spikes = [];
     task_spikes = [];
     
-    for trial=1:length(trial_start{session})
-    
-        trialstart = trial_start{session}(trial);
-        odor_on = odor_valve_on{session}(trial);
-        water_off = water_valve_off{session}(trial);
-        
-       for spike=1:length(unit_spikes)
-
-           if unit_spikes(spike) >= trialstart && unit_spikes(spike) <= trialstart + odor_on
-               
-               rest_spikes(end+1) = unit_spikes(spike);
-           
-           elseif unit_spikes(spike) >= trialstart + odor_on && unit_spikes(spike) <= trialstart + water_off
-               
-               task_spikes(end+1) = unit_spikes(spike);
-          
-            end
-        end
-    end
-    
-    rest{unit} = rest_spikes; 
-    task{unit} = task_spikes;
+    spikes{unit} = unit_spikes; 
     cell_info{unit} = struct('Dataset',dataset,'Species',species,'BrainArea',brain_area,'Animal_num',animal,'Session_num',session);
         
 end
 
-save('ofc_2.mat','task','rest','cell_info')
+save('ofc_2.mat','spikes','cell_info')
