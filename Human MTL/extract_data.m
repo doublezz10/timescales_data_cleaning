@@ -162,29 +162,28 @@ for unit = 1:num_clusters
     if all_brain_areas(unit) == 1
     
         cell_info_hc{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','hippocampus','Cluster',unique_clusters(unit),'TrialBreaks',events_info{session});
-        spikes_hc{end+1} = spikes_per_unit{unit}/10^6;
+        spikes_hc{end+1} = sort(spikes_per_unit{unit})/10^9;
         
     elseif all_brain_areas(unit) == 2
         
         cell_info_hc{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','hippocampus','Cluster',unique_clusters(unit),'TrialBreaks',events_info{session});
-        spikes_hc{end+1} = spikes_per_unit{unit}/10^6;
+        spikes_hc{end+1} = sort(spikes_per_unit{unit})/10^9;
         
     elseif all_brain_areas(unit) == 3
         
         cell_info_amygdala{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','amygdala','Cluster',unique_clusters(unit),'TrialBreaks',events_info{session});
-        spikes_amygdala{end+1} = spikes_per_unit{unit}/10^6;
+        spikes_amygdala{end+1} = sort(spikes_per_unit{unit})/10^9;
         
     elseif all_brain_areas(unit) == 4
         
         cell_info_amygdala{end+1} = struct('Dataset','Faraut','Species','human','BrainArea','amygdala','Cluster',unique_clusters(unit),'TrialBreaks',events_info{session});
-        spikes_amygdala{end+1} = spikes_per_unit{unit}/10^6;
+        spikes_amygdala{end+1} = sort(spikes_per_unit{unit})/10^9;
         
     end
     
     
 end
 
-<<<<<<< Updated upstream
 % Save spiketimes only!
 
 spikes = spikes_hc;
@@ -196,7 +195,7 @@ spikes = spikes_amygdala;
 cell_info = cell_info_amygdala;
 
 save('faraut_amygdala.mat','spikes','cell_info')
-=======
+
 % %% Save!
 % 
 % spikes = spikes_hc;
