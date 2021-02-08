@@ -15,7 +15,7 @@ for file = 1:length(filenames)
     
     for unit = 1:length(units)
         
-        all_spikes{end+1} = units{unit};
+        all_spikes{end+1} = transpose(units{unit});
     
         split_filename = split(filenames{file},"/");
     
