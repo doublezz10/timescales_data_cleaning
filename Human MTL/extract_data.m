@@ -3,8 +3,9 @@ clear
 % Get filenames
 
 filenames = getfn('D:\Human medial temporal lobe\Data\sorted');
+filenames_area = getfn('D:\Human medial temporal lobe\Data\events','brainArea.mat$');
 
-data_per_file = cell(2,length(filenames));
+data_per_file = cell(3,length(filenames));
 
 % Second column is original ClusterID, third is timestamp in us
 % Each row is a spike
@@ -186,15 +187,15 @@ end
 
 % Save spiketimes only!
 
-spikes = spikes_hc;
-cell_info = cell_info_hc;
-
-save('faraut_hippocampus.mat','spikes','cell_info')
-
-spikes = spikes_amygdala;
-cell_info = cell_info_amygdala;
-
-save('faraut_amygdala.mat','spikes','cell_info')
+% spikes = spikes_hc;
+% cell_info = cell_info_hc;
+% 
+% save('faraut_hippocampus.mat','spikes','cell_info')
+% 
+% spikes = spikes_amygdala;
+% cell_info = cell_info_amygdala;
+% 
+% save('faraut_amygdala.mat','spikes','cell_info')
 
 % %% Save!
 % 
