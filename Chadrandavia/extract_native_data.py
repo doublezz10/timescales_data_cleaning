@@ -1,3 +1,5 @@
+#%%
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -11,6 +13,7 @@ import scipy.io as spio
 import os
 import os.path
 import hdf5storage
+import pandas as pd
 
 TIME_SCALING = 10**6
 
@@ -33,7 +36,7 @@ all_sessions = []
 path_to_data = '/Users/zachz/Downloads/NativeData'
 
 sessions = [name for name in os.listdir('/Users/zachz/Downloads/NativeData/Data/Sorted')]
-sessions.remove('.DS_Store')
+sessions.pop(13)
 
 for session in range(len(sessions)):
 
@@ -106,13 +109,10 @@ for unit in range(len(all_selected_time_stamps)):
         
         amyg_spikes.append(all_selected_time_stamps[unit])
         
-hc_dict = {'cell_info': hc_cell_info, 'spikes': hc_spikes}
-amyg_dict = {'cell_info': amyg_cell_info, 'spikes': amyg_spikes}
+hc_cell_info = pd.DataFrame(hc_cell_info,columns=['Dataset','species','brain_area','unit_n','session','channel_id','original_cluster_id'])
 
-#%%
+amyg_cell_info = pd.DataFrame(amyg_cell_info,columns=['Dataset','species','brain_area','unit_n','session','channel_id','original_cluster_id'])
 
-hdf5storage.savemat('chandravadia_hc.mat',hc_dict)
-
-#%%
-
-hdf5storage.savemat('chandravadia_amyg.mat',amyg_dict)
+hc_cell_info.to_csv('/Users/zachz/Documents/timescales_analysis/1000iter results/by_individual/chadrandavia_hc_map.csv')
+amyg_cell_info.to_csv('/Users/zachz/Documents/timescales_analysis/1000iter results/by_individual/chadrandavia_amyg_map.csv')
+# %%
